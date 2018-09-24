@@ -47,7 +47,7 @@ const BoardBackground = styled.div`
 class ConnectFourBoard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {board: ConnectFour.board, currentPlayerNumber: 1};
+    this.state = {board: ConnectFour.board, currentPlayerNumber: 1, winner: null};
   }
 
   render() {
@@ -75,14 +75,14 @@ class ConnectFourBoard extends React.Component {
               if (this.state.currentPlayerNumber == 2)
                 nextPlayer = 1;
 
-              this.setState({board: ConnectFour.board, currentPlayerNumber: nextPlayer});
+              this.setState({board: ConnectFour.board, currentPlayerNumber: nextPlayer, winner: ConnectFour.checkHasWinner()});
             }}/>
           );
       }
     }
 
-    const winner = this.props.checkHasWinner;
-    const winnerComponent = winner ? <div>Player {ConnectFour.checkHasWinner()} wins!</div> : null;
+    const winner = this.state.winner;
+    const winnerComponent = winner ? <div>Player {this.state.winner} wins!</div> : null;
 
     return (
       <React.Fragment>
@@ -97,8 +97,4 @@ class ConnectFourBoard extends React.Component {
 }
 
 let App = document.getElementById("app");
-
-
-ReactDOM.render(<ConnectFourBoard rows={ConnectFour.rows} columns={ConnectFour.columns} checkHasWinner={ConnectFour.checkHasWinner()} boxClicked={(i, j, playerNumber) => {
-  ConnectFour.setPlayer(i, j, playerNumber);
-}} />, App);
+ReactDOM.render(<ConnectFourBoard rows={ConnectFour.rows} columns={ConnectFour.columns} boxClicked={(i, j, playerNumber) => ConnectFour.setPlayer(i, j, playerNumber)} />, App);
