@@ -8,17 +8,18 @@ class ConnectFour {
       this.board[i] = [];
 
       for (let j = 0; j < columns; j++) {
-        this.board[i][j] = null;
+        this.board[i][j] = 0;
       }
     }
 
-    this.board = [
-      [null, null, null, null, null],
-      [null, 1, null, null, null],
-      [null, null, 1, null, null],
-      [null, null, null, 1, null],
-      [null, null, null, null, 1]
-    ];
+    // this.board = [
+      // [2, 0, 0, 0, 0, 0, 0],
+      // [0, 2, 0, 0, 0, 0, 0],
+      // [0, 0, 1, 0, 0, 0, 0],
+      // [0, 0, 0, 1, 0, 0, 0],
+      // [0, 0, 0, 0, 1, 0, 0],
+      // [0, 0, 0, 0, 1, 0, 0]
+    // ];
   }
 
   coordinatesWithinRange(i, j) {
@@ -68,12 +69,4 @@ class ConnectFour {
   }
 }
 
-let connectFour = new ConnectFour(6, 7);
-export default connectFour;
-
-
-// 0 0 0 0 0
-// 0 1 0 0 0
-// 0 0 1 0 0
-// 0 0 0 1 0
-// 0 0 0 0 1
+export let connectFour = new ConnectFour(6, 7);
