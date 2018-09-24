@@ -23,7 +23,12 @@ class ConnectFour {
   }
 
   setPlayer(i, j, playerNumber) {
-    this.board[i][j] = playerNumber;
+    for (let i = this.rows - 1; i >= 0; i--) {
+      if (this.board[i][j] == 0) {
+        this.board[i][j] = playerNumber;
+        return;
+      }
+    }
   }
 
   coordinatesWithinRange(i, j) {
