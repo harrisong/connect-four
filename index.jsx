@@ -3,14 +3,15 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import styled from "styled-components";
 
+const size = 60;
+const margin = 10;
+
 const WrapperBox = styled.div`
-  width: 60px;
-  height: 60px;
+  width: ${size}px;
+  height: ${size}px;
   background-color: #ccc;
   display: inline-block;
-  margin: 10px;
-  line-height: 30px;
-  vertical-align: middle;
+  margin: ${margin}px;
   text-align: center;
   border-radius: 50%;
 `;
@@ -26,52 +27,78 @@ const PlayerTwoBox = styled(WrapperBox)`
 class Box extends React.Component {
   render() {
     if (this.props.player == 1) {
-      return <PlayerOneBox />;
+      return <PlayerOneBox onClick={this.props.onClick}/>;
     }
 
     if (this.props.player == 2) {
-      return <PlayerTwoBox />;
+      return <PlayerTwoBox onClick={this.props.onClick}/>;
     }
 
-    return <WrapperBox />;
+    return <WrapperBox onClick={this.props.onClick}/>;
   }
 }
 
 const BoardBackground = styled.div`
   background-color: yellow;
   display: inline-block;
-  padding: 15px;
+  width: ${(size + margin * 2) * 7}px;
 `;
 
 class ConnectFourBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {board: ConnectFour.board, currentPlayerNumber: 1};
+  }
+
   render() {
-    const rows = ConnectFour.rows;
-    const columns = ConnectFour.columns;
+    const rows = this.props.rows;
+    const columns = this.props.columns;
     const board = [];
 
+    if (!this.state.board)
+      return;
+
     for (let i = 0; i < rows; i++) {
+      board[i] = [];
+
       for (let j = 0; j < columns; j++) {
-        if (ConnectFour.board[i])
-          board.push(
-            <Box key={`${i}, ${j}`} player={ConnectFour.board[i][j]} />
+        if (this.state.board[i])
+          board[i].push(
+            <Box key={`${i}, ${j}`} player={this.state.board[i][j]} onClick={() => {
+              this.props.boxClicked(i, j, this.state.currentPlayerNumber);
+
+              let nextPlayer = null;
+
+              if (this.state.currentPlayerNumber == 1)
+                nextPlayer = 2;
+
+              if (this.state.currentPlayerNumber == 2)
+                nextPlayer = 1;
+
+              this.setState({board: ConnectFour.board, currentPlayerNumber: nextPlayer});
+            }}/>
           );
       }
-
-      board.push(<br />);
     }
 
-    const winner = ConnectFour.checkHasWinner();
+    const winner = this.props.checkHasWinner;
     const winnerComponent = winner ? <div>Player {ConnectFour.checkHasWinner()} wins!</div> : null;
 
     return (
       <React.Fragment>
         {winnerComponent}
 
-        <BoardBackground>{board}</BoardBackground>
-      </React.Fragment>
+        <BoardBackground>{
+          board
+        }</BoardBackground>
+    </React.Fragment>
     );
   }
 }
 
 let App = document.getElementById("app");
-ReactDOM.render(<ConnectFourBoard />, App);
+
+
+ReactDOM.render(<ConnectFourBoard rows={ConnectFour.rows} columns={ConnectFour.columns} checkHasWinner={ConnectFour.checkHasWinner()} boxClicked={(i, j, playerNumber) => {
+  ConnectFour.setPlayer(i, j, playerNumber);
+}} />, App);

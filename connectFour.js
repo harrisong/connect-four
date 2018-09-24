@@ -18,8 +18,12 @@ class ConnectFour {
       // [0, 0, 1, 0, 0, 0, 0],
       // [0, 0, 0, 1, 0, 0, 0],
       // [0, 0, 0, 0, 1, 0, 0],
-      // [0, 0, 0, 0, 1, 0, 0]
+      // [0, 0, 0, 0, 1, 1, 0]
     // ];
+  }
+
+  setPlayer(i, j, playerNumber) {
+    this.board[i][j] = playerNumber;
   }
 
   coordinatesWithinRange(i, j) {
