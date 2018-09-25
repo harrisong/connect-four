@@ -2,7 +2,7 @@ import * as React from "react";
 import { connectFour as ConnectFour } from "./connectFour";
 import styled, { keyframes } from "styled-components";
 import { Box } from "./Box";
-import { BoardBackgroundWithColumns, Column } from "./backgroundBoard";
+import { BoardBackgroundWithColumns, Column, GreyColumn } from "./backgroundBoard";
 import { size, margin } from "./Box";
 import { NameRenderer } from "./nameRenderer";
 
@@ -78,7 +78,7 @@ export class ConnectFourBoard extends React.Component {
       <React.Fragment>
         {winnerComponent}
         {board.map((column, index) => {
-          return <Column key={index}>{column}</Column>;
+          return <GreyColumn key={index}>{column}</GreyColumn>;
         })}
         <BoardBackgroundWithColumns
           boxClicked={this.onBoxClicked}
