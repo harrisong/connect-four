@@ -29,6 +29,8 @@ export const GreyColumn = styled(Column)`
 
 export const BoardContainer = styled.div`
   position: relative;
+  margin: auto;
+  width: ${7 * (margin + size)}px;
 `;
 
 export class BoardBackgroundWithColumns extends React.Component {

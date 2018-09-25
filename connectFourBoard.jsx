@@ -14,6 +14,9 @@ import { NameRenderer } from "./nameRenderer";
 const WinnerAnnouncement = styled.div`
   text-align: center;
   margin: 10px;
+  line-height: 30px;
+  height: 30px;
+}
 `;
 
 export class ConnectFourBoard extends React.Component {
@@ -122,7 +125,7 @@ export class ConnectFourBoard extends React.Component {
     this.setState({
       board: ConnectFour.board,
       currentPlayerNumber: nextPlayer,
-      winner: ConnectFour.checkHasWinner()
+    winner: ConnectFour.checkHasWinner()
     });
   }
 }
