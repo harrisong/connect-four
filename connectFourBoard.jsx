@@ -11,6 +11,11 @@ import {
 import { size, margin } from "./Box";
 import { NameRenderer } from "./nameRenderer";
 
+const WinnerAnnouncement = styled.div`
+  text-align: center;
+  margin: 10px;
+`;
+
 export class ConnectFourBoard extends React.Component {
   constructor(props) {
     super(props);
@@ -73,12 +78,17 @@ export class ConnectFourBoard extends React.Component {
 
     const winner = this.state.winner;
     const winnerComponent = winner ? (
-      <div>Player {this.state.winner} wins!</div>
+      <div>
+        {this.state.winner == 1
+          ? this.state.playerOneName
+          : this.state.playerTwoName}{" "}
+        wins!
+      </div>
     ) : null;
 
     return (
       <React.Fragment>
-        <React.Fragment>{winnerComponent}</React.Fragment>
+        <WinnerAnnouncement>{winnerComponent}</WinnerAnnouncement>
         <BoardContainer>
           {" "}
           {board.map((column, index) => {
@@ -92,15 +102,12 @@ export class ConnectFourBoard extends React.Component {
       </React.Fragment>
     );
   }
-
   onBoxClicked(i, j) {
-    this.props.boxClicked(i, j, this.state.currentPlayerNumber);
+    if (!this.props.boxClicked(i, j, this.state.currentPlayerNumber)) {
+      return;
+    }
 
-    let nextPlayer = null;
-
-    if (this.state.currentPlayerNumber == 1) nextPlayer = 2;
-
-    if (this.state.currentPlayerNumber == 2) nextPlayer = 1;
+    const nextPlayer = this.state.currentPlayerNumber == 1 ? 2 : 1;
 
     this.setState({
       board: ConnectFour.board,

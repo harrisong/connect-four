@@ -23,7 +23,7 @@ export const Column = styled.div`
 `;
 
 export const GreyColumn = styled(Column)`
-  background-color: #CCC;
+  background-color: #ced0fb;
   background-image: none;
 `;
 
@@ -40,13 +40,11 @@ export class BoardBackgroundWithColumns extends React.Component {
         <Column
           key={j}
           onClick={() => {
-            console.log("asdf");
             this.props.boxClicked(0, j, this.props.currentPlayerNumber);
           }}
         />
       );
     }
-    console.log(results);
 
     return <BoardBackground>{results}</BoardBackground>;
   }

@@ -24,9 +24,9 @@ class ConnectFour {
 
   setPlayer(i, j, playerNumber) {
     for (let i = this.rows - 1; i >= 0; i--) {
-      if (this.board[i][j] == 0) {
+      if (this.board[i][j] == 0 && playerNumber != null) {
         this.board[i][j] = playerNumber;
-        return;
+        return true;
       }
     }
   }
@@ -59,7 +59,6 @@ class ConnectFour {
   }
 
   checkHasWinner() {
-    console.log(this.board);
     let directions = ['bottom', 'up', 'right', 'left', 'right_bottom', 'left_bottom', 'left_up', 'right_up'];
 
 

@@ -12,7 +12,7 @@ const WrapperBox = styled.div`
   margin-top: 3px;
   text-align: center;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #ced0fb;
   transition: all 1s ease-in-out;
   z-index: 2;
 `;
