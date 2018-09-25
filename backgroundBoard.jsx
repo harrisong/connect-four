@@ -7,7 +7,7 @@ import { connectFour } from "./connectFour";
 const BoardBackground = styled.div`
   display: block;
   position: absolute;
-  top: 5px;
+  top: 0px;
   width: ${(size + margin) * 7}px;
   height: ${(size + margin) * 6}px;
   z-index: 1;
@@ -25,6 +25,10 @@ export const Column = styled.div`
 export const GreyColumn = styled(Column)`
   background-color: #CCC;
   background-image: none;
+`;
+
+export const BoardContainer = styled.div`
+  position: relative;
 `;
 
 export class BoardBackgroundWithColumns extends React.Component {

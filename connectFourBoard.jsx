@@ -2,7 +2,12 @@ import * as React from "react";
 import { connectFour as ConnectFour } from "./connectFour";
 import styled, { keyframes } from "styled-components";
 import { Box } from "./Box";
-import { BoardBackgroundWithColumns, Column, GreyColumn } from "./backgroundBoard";
+import {
+  BoardBackgroundWithColumns,
+  Column,
+  GreyColumn,
+  BoardContainer
+} from "./backgroundBoard";
 import { size, margin } from "./Box";
 import { NameRenderer } from "./nameRenderer";
 
@@ -61,10 +66,7 @@ export class ConnectFourBoard extends React.Component {
       for (let i = 0; i < rows; i++) {
         if (this.state.board[i])
           board[j].push(
-            <Box
-              key={`${i}, ${j}`}
-              player={this.state.board[i][j]}
-            />
+            <Box key={`${i}, ${j}`} player={this.state.board[i][j]} />
           );
       }
     }
@@ -76,14 +78,17 @@ export class ConnectFourBoard extends React.Component {
 
     return (
       <React.Fragment>
-        {winnerComponent}
-        {board.map((column, index) => {
-          return <GreyColumn key={index}>{column}</GreyColumn>;
-        })}
-        <BoardBackgroundWithColumns
-          boxClicked={this.onBoxClicked}
-          currentPlayerNumber={this.state.currentPlayerNumber}
-        />
+        <React.Fragment>{winnerComponent}</React.Fragment>
+        <BoardContainer>
+          {" "}
+          {board.map((column, index) => {
+            return <GreyColumn key={index}>{column}</GreyColumn>;
+          })}
+          <BoardBackgroundWithColumns
+            boxClicked={this.onBoxClicked}
+            currentPlayerNumber={this.state.currentPlayerNumber}
+          />
+        </BoardContainer>
       </React.Fragment>
     );
   }

@@ -9,6 +9,7 @@ const WrapperBox = styled.div`
   height: ${size}px;
   display: block;
   margin-bottom: ${margin}px;
+  margin-top: 3px;
   text-align: center;
   border-radius: 50%;
   background-color: #ccc;
