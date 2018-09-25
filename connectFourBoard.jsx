@@ -109,6 +109,10 @@ export class ConnectFourBoard extends React.Component {
     );
   }
   onBoxClicked(i, j) {
+    if (this.state.winner) {
+      return;
+    }
+
     if (!this.props.boxClicked(i, j, this.state.currentPlayerNumber)) {
       return;
     }
