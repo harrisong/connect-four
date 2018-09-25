@@ -24,7 +24,7 @@ export class ConnectFourBoard extends React.Component {
       currentPlayerNumber: 1,
       winner: null,
       playerOneName: null,
-      playerTwoName: null
+      playerTwoName: null,
     };
 
     this.onBoxClicked = this.onBoxClicked.bind(this);
@@ -40,7 +40,10 @@ export class ConnectFourBoard extends React.Component {
             onChangeHandler={name =>
               this.setState({ playerOneName: name.target.value })
             }
-            markAsDone={() => this.setState({ playerOneSet: true })}
+            markAsDone={() => {
+              if (this.state.playerOneName !== null && this.state.playerOneName !== '')
+                this.setState({ playerOneSet: true });
+            }}
           />
         </React.Fragment>
       );
@@ -54,7 +57,10 @@ export class ConnectFourBoard extends React.Component {
             onChangeHandler={name =>
               this.setState({ playerTwoName: name.target.value })
             }
-            markAsDone={() => this.setState({ playerTwoSet: true })}
+            markAsDone={() => {
+              if (this.state.playerTwoName !== null && this.state.playerTwoName !== '')
+                this.setState({ playerTwoSet: true });
+            }}
           />
         </React.Fragment>
       );
