@@ -39,18 +39,18 @@ class ConnectFour {
     if (!this.board[i][j]) return false;
     if (remaining == 1) return true;
 
-    const nextCooridnate = [
-      { dir: "bottom", new_i: i + 1, new_j: j },
-      { dir: "up", new_i: i - 1, new_j: j },
-      { dir: "right", new_i: i, new_j: j + 1 },
-      { dir: "left", new_i: i, new_j: j - 1 },
-      { dir: "right_bottom", new_i: i + 1, new_j: j + 1 },
-      { dir: "left_bottom", new_i: i + 1, new_j: j - 1 },
-      { dir: "left_up", new_i: i - 1, new_j: j - 1 },
-      { dir: "right_up", new_i: i - 1, new_j: j + 1 }
-    ];
+    const nextCooridnate = {
+      bottom: { new_i: i + 1, new_j: j },
+      up: { new_i: i - 1, new_j: j },
+      right: { new_i: i, new_j: j + 1 },
+      left: { new_i: i, new_j: j - 1 },
+      right_bottom: { new_i: i + 1, new_j: j + 1 },
+      left_bottom: { new_i: i + 1, new_j: j - 1 },
+      left_up: { new_i: i - 1, new_j: j - 1 },
+      right_up: { new_i: i - 1, new_j: j + 1 }
+    };
 
-    const next = nextCooridnate.find(coordinate => coordinate.dir === dir);
+    const next = nextCooridnate[dir];
     if (
       next &&
       this.coordinatesWithinRange(next.new_i, next.new_j) &&
