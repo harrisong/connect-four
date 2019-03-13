@@ -13,12 +13,12 @@ class ConnectFour {
     }
 
     // this.board = [
-      // [2, 0, 0, 0, 0, 0, 0],
-      // [0, 2, 0, 0, 0, 0, 0],
-      // [0, 0, 1, 0, 0, 0, 0],
-      // [0, 0, 0, 1, 0, 0, 0],
-      // [0, 0, 0, 0, 1, 0, 0],
-      // [0, 0, 0, 0, 1, 1, 0]
+    // [2, 0, 0, 0, 0, 0, 0],
+    // [0, 2, 0, 0, 0, 0, 0],
+    // [0, 0, 1, 0, 0, 0, 0],
+    // [0, 0, 0, 1, 0, 0, 0],
+    // [0, 0, 0, 0, 1, 0, 0],
+    // [0, 0, 0, 0, 1, 1, 0]
     // ];
   }
 
@@ -35,40 +35,48 @@ class ConnectFour {
     return i >= 0 && i < this.rows && j >= 0 && j < this.columns;
   }
 
-  checkNeighbour(i, j, remaining = 4, dir = 'up') {
-    if (remaining == 1)
-      return true;
+  checkNeighbour(i, j, remaining = 4, dir = "up") {
+    if (!this.board[i][j]) return false;
+    if (remaining == 1) return true;
 
     const nextCooridnate = [
-      {dir: 'bottom', new_i: i + 1, new_j: j},
-      {dir: 'up', new_i: i - 1, new_j: j},
-      {dir: 'right', new_i: i, new_j: j + 1},
-      {dir: 'left', new_i: i, new_j: j - 1},
-      {dir: 'right_bottom', new_i: i + 1, new_j: j + 1},
-      {dir: 'left_bottom', new_i: i + 1, new_j: j - 1},
-      {dir: 'left_up', new_i: i - 1, new_j: j - 1},
-      {dir: 'right_up', new_i: i - 1, new_j: j + 1},
+      { dir: "bottom", new_i: i + 1, new_j: j },
+      { dir: "up", new_i: i - 1, new_j: j },
+      { dir: "right", new_i: i, new_j: j + 1 },
+      { dir: "left", new_i: i, new_j: j - 1 },
+      { dir: "right_bottom", new_i: i + 1, new_j: j + 1 },
+      { dir: "left_bottom", new_i: i + 1, new_j: j - 1 },
+      { dir: "left_up", new_i: i - 1, new_j: j - 1 },
+      { dir: "right_up", new_i: i - 1, new_j: j + 1 }
     ];
 
-    for (let next of nextCooridnate) {
-      if (this.coordinatesWithinRange(next.new_i, next.new_j) && dir == next.dir && this.board[next.new_i][next.new_j] == this.board[i][j])
-        return this.checkNeighbour(next.new_i, next.new_j, remaining - 1, dir);
-    }
+    const next = nextCooridnate.find(coordinate => coordinate.dir === dir);
+    if (
+      next &&
+      this.coordinatesWithinRange(next.new_i, next.new_j) &&
+      this.board[next.new_i][next.new_j] == this.board[i][j]
+    )
+      return this.checkNeighbour(next.new_i, next.new_j, remaining - 1, dir);
 
-    return false
+    return false;
   }
 
   checkHasWinner() {
-    let directions = ['bottom', 'up', 'right', 'left', 'right_bottom', 'left_bottom', 'left_up', 'right_up'];
-
+    let directions = [
+      "bottom",
+      "up",
+      "right",
+      "left",
+      "right_bottom",
+      "left_bottom",
+      "left_up",
+      "right_up"
+    ];
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
         for (let dir of directions) {
-          if (this.board[i][j]) {
-            if (this.checkNeighbour(i, j, 4, dir))
-              return this.board[i][j]
-          }
+          if (this.checkNeighbour(i, j, 4, dir)) return this.board[i][j];
         }
       }
     }
