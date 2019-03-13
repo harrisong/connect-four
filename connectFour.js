@@ -85,4 +85,5 @@ class ConnectFour {
   }
 }
 
-export let connectFour = new ConnectFour(6, 7);
+const connectFour = new ConnectFour(6, 7);
+module.exports = { connectFour };

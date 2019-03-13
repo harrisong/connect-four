@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "author": "Harrison Ng",
+  "scripts": {
+    "test": "jasmine ./spec/*.js"
+  },
   "dependencies": {
     "babel-preset-react": "^6.24.1",
+    "jasmine": "^3.3.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "styled-components": "^3.4.9",
     "typescript": "^3.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
   }
 }
