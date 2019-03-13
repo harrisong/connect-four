@@ -40,13 +40,9 @@ class ConnectFour {
     if (remaining == 1) return true;
 
     const nextCooridnate = {
-      bottom: { new_i: i + 1, new_j: j },
       up: { new_i: i - 1, new_j: j },
       right: { new_i: i, new_j: j + 1 },
-      left: { new_i: i, new_j: j - 1 },
       right_bottom: { new_i: i + 1, new_j: j + 1 },
-      left_bottom: { new_i: i + 1, new_j: j - 1 },
-      left_up: { new_i: i - 1, new_j: j - 1 },
       right_up: { new_i: i - 1, new_j: j + 1 }
     };
 
@@ -62,16 +58,7 @@ class ConnectFour {
   }
 
   checkHasWinner() {
-    let directions = [
-      "bottom",
-      "up",
-      "right",
-      "left",
-      "right_bottom",
-      "left_bottom",
-      "left_up",
-      "right_up"
-    ];
+    let directions = ["up", "right", "right_bottom", "right_up"];
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
